@@ -28,7 +28,7 @@ class DCO_Agent(object):
         self.pi_func_optim = Adam(params=self.pi_func_params, lr=self.args.lr)
         self.pi_value_optim = Adam(params=self.pi_value_params, lr=self.args.lr)
 
-        log_dir = os.path.join('./option_agent', self.args.log_dir)
+        log_dir = './option_agent' + self.args.log_dir
         if not os.path.exists(log_dir):
             os.makedirs(log_dir)
         self.writer = SummaryWriter(log_dir)

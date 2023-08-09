@@ -10,6 +10,6 @@ for _ in range(500):
     act = env.action_space.sample()
     obs, rwd, done, info = env.step(act)
     print(obs, rwd, done, info)
-    env.render()
+    # env.render()
     if done:
         break

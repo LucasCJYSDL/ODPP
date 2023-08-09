@@ -22,7 +22,7 @@ class Runner(object):
             self.agent.load_models(path=self.args.load_dir)
 
         self.scheme = {"option": {"vshape": 1, "dtype": torch.long, "traj_const": True}, "state": {"vshape": args.obs_dim}, "reward": {"vshape": 1},
-                       "done": {"vshape": 1}, "next_state": {"vshape": args.obs_dim},
+                       "done": {"vshape": 1}, "next_state": {"vshape": args.obs_dim}, "option_emb": {"vshape": args.code_dim},
                        "horizon": {"vshape": 1, "dtype": torch.long, "traj_const": True}, "filled": {"vshape": 1}}
         self.preprocess = {"option": ("option_onehot", OneHot(out_dim=self.args.code_dim))}
         if self.args.is_discrete:
@@ -70,7 +70,8 @@ class Runner(object):
                 done_list.append(float(done))
             done_vec = new_done_vec
 
-            transition = {"state": s, "action": act, "reward": rwd_list, "done": done_list, "next_state": next_s, "filled": filled_list}
+            transition = {"state": s, "action": act, "reward": rwd_list, "done": done_list, "next_state": next_s,
+                          "filled": filled_list, "option_emb": c_onehot}
 
             episode_batch.update(transition, ts=time_step)
             if np.array(env_done).all():  # rarely happen

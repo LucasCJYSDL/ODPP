@@ -91,11 +91,11 @@ class LapReprLearner:
         self._train_info = collections.OrderedDict()
 
         # # create ckpt save dir and log dir
-        self.saver_dir = os.path.join('./spectral_DPP_agent', self.args.model_dir)
+        self.saver_dir = './spectral_DPP_agent' + self.args.model_dir
         print(self.saver_dir)
         if not os.path.exists(self.saver_dir):
             os.makedirs(self.saver_dir)
-        self.log_dir = os.path.join('./spectral_DPP_agent', self.args.log_dir)
+        self.log_dir = './spectral_DPP_agent' + self.args.log_dir
         if not os.path.exists(self.log_dir):
             os.makedirs(self.log_dir)
         self.writer = SummaryWriter(self.log_dir)

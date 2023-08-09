@@ -22,7 +22,7 @@ class Option_Agent(object):
         self.prior_func_optim = None
         self.prior_value_optim = None
 
-        log_dir = os.path.join('./option_agent', self.args.log_dir)
+        log_dir = './option_agent' + self.args.log_dir
         print(log_dir)
         if not os.path.exists(log_dir):
             os.makedirs(log_dir)

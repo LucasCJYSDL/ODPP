@@ -14,7 +14,8 @@ The following parts are included:
 - pytorch 1.6
 - tensorboard 2.5
 - mujoco_py >= 1.5
-- gym <= 2.0
+- atari_py 0.2.6
+- gym  0.19.0
 - matplotlib
 - tqdm
 - seaborn
@@ -85,3 +86,25 @@ python main.py
 python main.py
 ```
 
+## How to run experiments on OpenAI Gym tasks
+- You need to first enter the folder 'ODPP_Atari'.
+- To run the code with algorithm XXX (i.e., VIC, VALOR, DIAYN, ODPP, DCO, DADS, APS) and random seed Y on task ZZZ (i.e., AirRaid-ram-v0, CartPole-v1, or Riverraid-ram-v0):
+
+```bash
+python main.py --agent_id='XXX' --seed=Y --env_id='ZZZ'
+```
+
+- For the simpler task 'CartPole-v1', we learn options with a longer horizon, i.e., 100. Hence, you need to change the value of 'args.traj_length' on Line 29 of 'configs.py' to 100. While, for the other tasks, the value of 'args.traj_length' should be 50.
+- The tensorboard files containing the training information can be found in 'option_agent/log', within which the term 'tot_rwd' records the change of the trajectory reward in the training process.
+- The introduction of the Atari environments that we have evaluated on can be found in [Atari Wiki](https://github.com/openai/gym/wiki/Table-of-environments).
+
+
+## How to get the quantitative ablation study results
+
+- First, you need to generate checkpoints for different algorithms in the Mujoco Maze tasks (Point4Rooms-v0 or PointCorridor-v0) as introduced in the first section above.
+- Alternatively, you can directly use the provided checkpoints in 'ODPP_Quan/pre_ckpt' and 'ODPP_Quan/pre_ckpt_corr' which are for Point4Rooms-v0 and PointCorridor-v0, respectively. In these folders, 'ODPP_MAP' refers to 'ODPP (L<sup>IB</sup>)', 'ODPP_MAP_f' refers to  'ODPP (L<sup>IB</sup>, L<sup>DPP</sup><sub>1</sub>)', and 'ODPP_MAP_f_g_h' refers to our algorithm.
+- To test the checkpoints, you need to enter the folder 'ODPP_Quan'.
+- To run the code with checkpoint XXX on task ZZZ (Point4Rooms-v0 or PointCorridor-v0):
+```bash
+python main.py --env_id='ZZZ' --load_dir='XXX'
+```

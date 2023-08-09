@@ -3,15 +3,15 @@ import argparse
 def get_common_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--env_id', type=str, default='AirRaid-ram-v0', help='RL environment') ### 'CartPole-v1' 'Riverraid-ram-v0'
-    parser.add_argument('--seed', type=int, default=0, help='random seed')
-    parser.add_argument('--agent_id', type=str, default='ODPP', help='algorithm for option discovery') ### # 'VIC' or 'VALOR' or 'DIAYN' or 'ODPP' or 'DCO' for now
+    parser.add_argument('--env_id', type=str, default='Riverraid-ram-v0', help='RL environment') ### 'CartPole-v1', 'Riverraid-ram-v0', 'AirRaid-ram-v0'
+    parser.add_argument('--seed', type=int, default=2, help='random seed')
+    parser.add_argument('--agent_id', type=str, default='APS', help='algorithm for option discovery') ### # 'VIC' or 'VALOR' or 'DIAYN' or 'ODPP' or 'DCO' or 'DADS' or 'APS' for now
     parser.add_argument('--base_alg', type=str, default='PPO', help='algorithm for optimizing the NNs')
-    parser.add_argument('--log_dir', type=str, default='./log', help='where to save the log files')
+    parser.add_argument('--log_dir', type=str, default='/log', help='where to save the log files')
     parser.add_argument('--model_dir', type=str, default='./ckpt', help='where to save the ckpt files')
     parser.add_argument('--load_dir', type=str, default='', help='where to load the pre_trained ckpt files') ###
     parser.add_argument('--cuda', type=bool, default=True, help='whether to use GPU')
-    parser.add_argument('--gpu', type=str, default='3', help='which gpu to use') ###
+    parser.add_argument('--gpu', type=str, default='1', help='which gpu to use') ###
     parser.add_argument('--thread_num', type=int, default=10, help='number of threads to run in parallel')
     parser.add_argument('--render', type=bool, default=False, help='whether to render the env')
     parser.add_argument('--visualize_traj', type=bool, default=False, help='whether to visualize the options')
@@ -21,7 +21,7 @@ def get_common_args():
 
 def get_rl_args(args):
     # rollout parameters
-    args.episode_num = 5000  # 10000 the total number of training episodes
+    args.episode_num = 1500  # 10000 the total number of training episodes
     args.lap_train_interval = 5000
     args.ckpt_interval = 500
     args.traj_num = 200
